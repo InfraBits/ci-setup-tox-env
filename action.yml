@@ -23,7 +23,7 @@ runs:
 
         tox_envs=$(tox --listenvs)
 
-        tox_lint_envs=$(grep -Ev '^test-' <<< "$tox_envs" || true)
+        tox_lint_envs=$(grep -Ev '^test(-|$)' <<< "$tox_envs" || true)
         if [ -n "$tox_lint_envs" ];
         then
         
@@ -33,7 +33,7 @@ runs:
           echo "tox_lint_envs=$tox_lint_envs" >> $GITHUB_OUTPUT
         fi
 
-        tox_test_envs=$(grep -E '^test-' <<< "$tox_envs" || true)
+        tox_test_envs=$(grep -E '^test(-|$)' <<< "$tox_envs" || true)
         if [ -n "$tox_test_envs" ];
         then
         
