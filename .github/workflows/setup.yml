@@ -23,17 +23,17 @@ jobs:
       test: ${{ steps.envs.outputs.test }}
     steps:
       - name: checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: setup python
-        uses: infrabits/ci-setup-python@main
+        uses: infrabits/ci-setup-python@db288e4d1d4101897e8ccb75c30cfd3f6a32965f # main
         with:
           install_dependencies: false
           install_test_dependencies: false
           install_tox: true
 
       - name: setup tox environments
-        uses: infrabits/ci-setup-tox-envs@main
+        uses: infrabits/ci-setup-tox-envs@074e244caac28725f96e30aec161a284c8f9b7e3 # main
         id: envs
         with:
           ignore_envs: ${{ inputs.ignore_envs }}
