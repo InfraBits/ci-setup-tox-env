@@ -36,4 +36,4 @@ jobs:
         uses: infrabits/ci-setup-tox-envs@main
         id: envs
         with:
-          ignore_envs: ${{ steps.envs.inputs.ignore_envs }}
+          ignore_envs: ${{ inputs.ignore_envs }}
