@@ -2,6 +2,11 @@ name: Setup tox test environments
 
 on:
   workflow_call:
+    inputs:
+      ignore_envs:
+        required: false
+        type: string
+        default: ""
     outputs:
       lint:
         description: JSON array of lint tox environments
@@ -30,3 +35,5 @@ jobs:
       - name: setup tox environments
         uses: infrabits/ci-setup-tox-envs@main
         id: envs
+        with:
+          ignore_envs: ${{ steps.envs.inputs.ignore_envs }}
