@@ -1,6 +1,12 @@
 name: Setup tox test environments
 description: 'Find all tox environments configured by "type"'
 
+inputs:
+  ignore_envs:
+    required: false
+    type: string
+    default: ""
+
 outputs:
   lint:
     description: JSON array of lint tox environments
@@ -23,22 +29,27 @@ runs:
 
         tox_envs=$(tox --listenvs)
 
+        ignore_envs=$(tr "," " " <<< "${{ inputs.ignore_envs }}")
+        if [ -n "$ignore_envs}" ];
+        then
+          for group in ${ignore_envs};
+          do
+            export tox_envs=$(grep -Ev '^'$group'$' <<< "$tox_envs" || true)
+          done
+        fi
+
         tox_lint_envs=$(grep -Ev '^test(-|$)' <<< "$tox_envs" || true)
         if [ -n "$tox_lint_envs" ];
         then
-        
           tox_lint_envs=$(jq -Rnc '[inputs]' <<< "$tox_lint_envs")
           echo "Found lint environments: $tox_lint_envs"
-
           echo "tox_lint_envs=$tox_lint_envs" >> $GITHUB_OUTPUT
         fi
 
         tox_test_envs=$(grep -E '^test(-|$)' <<< "$tox_envs" || true)
         if [ -n "$tox_test_envs" ];
         then
-        
           tox_test_envs=$(jq -Rnc '[inputs]' <<< "$tox_test_envs")
           echo "Found test environments: $tox_test_envs"
-        
           echo "tox_test_envs=$tox_test_envs" >> $GITHUB_OUTPUT
         fi
