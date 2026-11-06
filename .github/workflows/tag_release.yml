@@ -11,8 +11,3 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           tag: '${{ github.ref }}'
-
-  deploy:
-    needs: [create-release]
-    uses: ./.github/workflows/deploy.yml
-    secrets: inherit
