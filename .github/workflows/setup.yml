@@ -26,14 +26,14 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: setup python
-        uses: infrabits/ci-setup-python@e067cec0986e3da663d95e6de24833c60322547c # main
+        uses: infrabits/ci-setup-python@be3a0e8654650f5e4fd7e81c40acde805e6fa9e7 # v1.4.0
         with:
           install_dependencies: false
           install_test_dependencies: false
           install_tox: true
 
       - name: setup tox environments
-        uses: infrabits/ci-setup-tox-envs@e334c14a5ddc8756a926c152b5e8cd97ed0aca24 # main
+        uses: infrabits/ci-setup-tox-envs@31b79a1d47cb760051bc73d5cb28a6b9bda24480 # v1.5.0
         id: envs
         with:
           ignore_envs: ${{ inputs.ignore_envs }}
