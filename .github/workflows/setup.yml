@@ -33,7 +33,7 @@ jobs:
           install_tox: true
 
       - name: setup tox environments
-        uses: infrabits/ci-setup-tox-envs@b2d4f67c809423d364e800630fa6919868e903f5 # v1.8.0
+        uses: infrabits/ci-setup-tox-envs@4f1b39f5c566f6a387aea8ed2c57402dc122b233 # v1.10.0
         id: envs
         with:
           ignore_envs: ${{ inputs.ignore_envs }}
